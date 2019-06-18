@@ -1,0 +1,19 @@
+{
+  "name": "esports-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Ofcur@bitbucket.org/toyotasuzuki/frontend-core.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/toyotasuzuki/frontend-core#readme",
+  "dependencies": {
+    "qs": "^6.7.0"
+  }
+}
