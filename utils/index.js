@@ -1,4 +1,4 @@
 /* global window */
-export * from './request'
+export default './request'
 
 
