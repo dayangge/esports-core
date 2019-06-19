@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rd /s/q lib && mkdir lib",
+    "lib": "npm run clean && babel components --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -14,6 +16,16 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/toyotasuzuki/frontend-core#readme",
   "dependencies": {
-    "qs": "^6.7.0"
+    "prop-types": "^15.7.2",
+    "qs": "^6.7.0",
+    "react": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^7.0.0-bridge.0"
   }
 }
