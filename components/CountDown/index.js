@@ -5,7 +5,7 @@ function fixedZero(val) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
-export default class CountDown extends Component {
+class CountDown extends Component {
   timer = 0;
 
   interval = 1000;
@@ -56,7 +56,7 @@ export default class CountDown extends Component {
   render() {
     const {   ...rest } = this.props;
     const { lastTime } = this.state;
-    return <span {...rest}>{fixedZero(lastTime)}</span>;
+    return (<span {...rest}>{fixedZero(lastTime)}</span>);
   }
 }
 
@@ -72,3 +72,5 @@ PropTypes.propTypes = {
   children: PropTypes.node,
   time: PropTypes.number,
 };
+
+export default CountDown;

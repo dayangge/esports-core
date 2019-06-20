@@ -26,10 +26,14 @@ if(_isLocalStorageSupported()) {
 }
   return res;
 };
+
 export const setStorage = function(key, val) {
   ///localStorage.setItem / cookies
   if(_isLocalStorageSupported()) {
-    window.localStorage.setItem(key, val)
+    if (typeof val === 'object') {
+      value = JSON.stringify(val);
+    }
+    window.localStorage.setItem(key, val);
   }else {
     ///cookie
       let d = new Date();
@@ -39,20 +43,12 @@ export const setStorage = function(key, val) {
   }
 };
 
-
-const LocalStorage = {
-  add: (key, value) => {
-    if (typeof value === 'object') {
-      value = JSON.stringify(value);
-    }
-    storage.setItem(key, value);
-  },
-  // 覆盖原先的对象
-  addCoverObject: (key, value) => {
+export const addCoverObject = function(key, value) {
+  if (_isLocalStorageSupported()) {
     if (typeof value === 'string') {
       value = JSON.parse(value);
     }
-    let currValue = storage.getItem(key);
+    let currValue = window.localStorage.getItem(key);
     let resValue = {};
     if (currValue) {
       currValue = JSON.parse(currValue);
@@ -60,18 +56,21 @@ const LocalStorage = {
     } else {
       resValue = value;
     }
-    LocalStorage.add(key, resValue);
-  },
-  get: (key) => {
-    return storage.getItem(key);
-  },
-  remove: (key) => {
-    storage.removeItem(key);
-  },
-  clear: () => {
-    storage.clear();
-  },
+    window.localStorage.setItem(key, resValue);
+  }
 };
+
+export const removeStorage = function(key){
+  if(_isLocalStorageSupported()) {
+    window.localStorage.removetem(key);
+  }
+};
+export const clearStorage = function() {
+  if(_isLocalStorageSupported()) {
+    window.localStorage.clear();
+  }
+};
+
 
 
 
