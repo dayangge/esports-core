@@ -36,6 +36,26 @@ export async function matchResult(params) {
   return request(`/api/matchResult?${stringify(params)}`);
 }
 
+/*获取账变信息列表*/
+export async function runningAccount(params) {
+  return request(`/api/runningAccount?${stringify(params)}`);
+}
+
+/*获取所有游戏记录列表*/
+export async function gameLog(params) {
+  return request('/api/gameLog', {
+    method: 'POST',
+    data: {
+      ...params,
+    },
+  });
+}
+
+/*获取规则列表*/
+export async function ruleDesc(params) {
+  return request(`/api/ruleDesc?${stringify(params)}`);
+}
+
 
 export async function queryRule(params) {
   return request(`/api/rule?${stringify(params)}`);
