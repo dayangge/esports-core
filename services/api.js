@@ -56,6 +56,16 @@ export async function ruleDesc(params) {
   return request(`/api/ruleDesc?${stringify(params)}`);
 }
 
+/*获取公告列表*/
+export async function annList(params) {
+  return request('/api/annList', {
+    method: 'POST',
+    data: {
+      ...params,
+    },
+  });
+}
+
 
 export async function queryRule(params) {
   return request(`/api/rule?${stringify(params)}`);
