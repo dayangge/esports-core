@@ -1,6 +1,11 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
 
+/*登陆*/
+export async function loginApp(params) {
+  return request(`http://192.168.10.244:8082/v1/auth?${stringify(params)}`);
+}
+
 /*获取游戏显示列表*/
 export async function gameList(params) {
   return request(`/api/gameList?${stringify(params)}`);
@@ -66,6 +71,7 @@ export async function annList(params) {
   });
 }
 
+/*
 
 export async function queryRule(params) {
   return request(`/api/rule?${stringify(params)}`);
@@ -80,3 +86,4 @@ export async function removeRule(params) {
     },
   });
 }
+*/

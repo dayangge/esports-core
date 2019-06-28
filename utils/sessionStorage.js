@@ -1,6 +1,6 @@
-const storage = window.localStorage;
+const storage = window.sessionStorage;
 
-const LocalStorage = {
+const SessionStorage = {
     add: (key, value) => {
         if (typeof value === 'object') {
             value = JSON.stringify(value);
@@ -20,7 +20,7 @@ const LocalStorage = {
         } else {
             resValue = value;
         }
-        LocalStorage.add(key, resValue);
+        SessionStorage.add(key, resValue);
     },
     get: (key) => {
         return storage.getItem(key);
@@ -33,4 +33,4 @@ const LocalStorage = {
     },
 };
 
-export default LocalStorage;
+export default SessionStorage;

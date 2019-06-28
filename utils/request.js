@@ -1,7 +1,7 @@
 import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import { stringify as qsStringify } from 'qs';
-import storage from './localStorage';
+import storage from './sessionStorage';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -27,7 +27,7 @@ function checkStatus(response) {
   if (response.status === 401) {
     const errortext = codeMessage[response.status] || response.statusText;
     notification.error({
-      message: `Token失效`,
+      message: `Token失效,请从平台重新登录`,
       description: errortext,
       duration: 1.5,
       onClose: () => {
@@ -57,10 +57,9 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 function request(url, options) {
-  if (storage.get('user')) {
+  if (storage.get('token')) {
     options.headers = {};
-    options.headers.token = JSON.parse(storage.get('user')).token;
-    options.headers.uid = JSON.parse(storage.get('user')).user_id;
+    options.headers.token = JSON.parse(storage.get('token')).token;
   }
   const defaultOptions = {
     credentials: 'include'
