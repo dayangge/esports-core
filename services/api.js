@@ -2,6 +2,12 @@ import { stringify } from 'qs';
 import request from '../utils/request';
 
 /*登陆*/
+export async function login1(params) {
+  return request(`http://192.168.10.108:84/api2.php?account=member450128&agent=5ae76a27001e5c`);
+}
+
+
+/*登陆*/
 export async function loginApp(params) {
   return request(`http://192.168.10.244:8082/v1/auth?${stringify(params)}`);
 }

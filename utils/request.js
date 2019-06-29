@@ -25,15 +25,16 @@ function checkStatus(response) {
     return response;
   }
   if (response.status === 401) {
+
     const errortext = codeMessage[response.status] || response.statusText;
     notification.error({
       message: `Token失效,请从平台重新登录`,
       description: errortext,
-      duration: 1.5,
+      duration: 3.5,
       onClose: () => {
-        storage.remove('user');
+        storage.remove('token');
         storage.remove('loginStatus');
-        window.location.reload();
+        /*window.location.reload();*/
       }
     });
     return;
@@ -59,12 +60,10 @@ function checkStatus(response) {
 function request(url, options) {
   if (storage.get('token')) {
     options.headers = {};
-    options.headers.token = JSON.parse(storage.get('token')).token;
+    options.headers.Authorization = `Bearer ${storage.get('token')}`;
   }
-  const defaultOptions = {
-    credentials: 'include'
-  };
-  const newOptions = { ...defaultOptions, ...options };
+
+  const newOptions = {  ...options };
   if (newOptions.method === 'POST' || newOptions.method === 'PUT' || newOptions.method === 'DELETE') {
     if (!(newOptions.body instanceof FormData)) {
       newOptions.headers = {
