@@ -12,7 +12,7 @@ export const getStorage = function(key) {
   ///localStorage.getItem / cookies
 let res = ''  ;
 if(_isLocalStorageSupported()) {
-  res = window.localStorage.getItem(key)
+  res =JSON.parse( window.localStorage.getItem(key))
 }else {
   ///cookie
  let name = `${key}=`;
@@ -31,7 +31,7 @@ export const setStorage = function(key, val) {
   ///localStorage.setItem / cookies
   if(_isLocalStorageSupported()) {
     if (typeof val === 'object') {
-      value = JSON.stringify(val);
+      val = JSON.stringify(val);
     }
     window.localStorage.setItem(key, val);
   }else {

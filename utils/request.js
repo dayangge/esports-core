@@ -25,7 +25,6 @@ function checkStatus(response) {
     return response;
   }
   if (response.status === 401) {
-
     const errortext = codeMessage[response.status] || response.statusText;
     notification.error({
       message: `Token失效,请从平台重新登录`,
@@ -72,7 +71,10 @@ function request(url, options) {
         ...newOptions.headers,
       };
       newOptions.body = JSON.stringify(newOptions.body);
+      newOptions.mode = 'cors'
+      console.log()
     } else {
+      newOptions.mode = 'cors';
       newOptions.headers = {
         Accept: 'application/json',
         ...newOptions.headers,
@@ -96,10 +98,12 @@ function request(url, options) {
 function proxyRequest(url, options) {
   options = options || {};
   return request(url, options).then((response) => {
-    if (response.success === 1) {
+    if (response.code === 0) {
+
       return response.data;
+    }else {
+     console.log(response.msg)
     }
-    return response || null;
   }).catch((e) => {
     // notification.error({
     //     message: e.message,

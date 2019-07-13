@@ -20,14 +20,14 @@ export const normalizeData = (data, schema) => {
 
 export const newDataAccordingToID = (data, schema) => {
   let kvObj = {};
-  let log = [];
+  let round = [];
   let arr = [];
   if(Array.isArray(data)) {
     data.forEach(item => {
       if(Array.isArray(arr[item[schema]])){
         arr[item[schema]].push(item)
       }else {
-        log.push(
+        round.push(
           {
             id: item[schema],
             name:roundName[item[schema]]
@@ -37,8 +37,12 @@ export const newDataAccordingToID = (data, schema) => {
       }
     })
   }
+  round = round.sort(
+    function(a,b){
+     return a.id-b.id}
+     );
   kvObj.list = arr;
-  kvObj[schema] = log;
+  kvObj[schema] = round;
   return kvObj
 };
 
@@ -53,11 +57,51 @@ const roundName = {
   7: '第七场',
 };
 
+export const BORound = {
+  0: '',
+  1: 'BO1',
+  2: 'BO2',
+  3: 'BO3',
+  4: 'BO4',
+  5: 'BO5',
+  6: 'BO6',
+  7: 'BO7',
+};
+
 export const gameBgColor = {
-  1: 'lol',
-  2: 'dota2',
-  3: 'csgo',
-  4: 'pubg',
-  5: 'ow',
-  6: 'gok',
+  default: {
+    logo:'https://img.avia01.com/upload/201809/0712370353b5.jpeg',
+    name:'lol',
+    bg:'linear-gradient(to right, #4858a6, #2a304a)'
+  },
+  lol: {
+    logo:'https://img.avia01.com/upload/201809/0712370353b5.jpeg',
+    name:'lol',
+    bg:'linear-gradient(to right, #4858a6, #2a304a)'
+  },
+  dota2:{
+    logo:'https://img.avia01.com/upload/201804/08142117a58f.png',
+    name:'dota2',
+    bg:'linear-gradient(to right, #812f2b, #412526)'
+  },
+  csgo:{
+    logo: 'https://img.avia01.com/upload/201804/08142101a2a8.png',
+    name: 'csgo',
+    bg:'linear-gradient(to right, #b17c29, #6e4300)'
+  } ,
+  pubg: {
+    logo:'https://img.avia01.com/upload/201804/081428128868.png',
+    name: 'pubg',
+    bg:'linear-gradient(to right, #6b562b, #4a3e24'
+  },
+  ow: {
+    logo: 'https://img.avia01.com/upload/201804/08142054167a.png',
+    name: 'ow',
+    bg:'linear-gradient(to right, #555964, #2d2e30)'
+  },
+  aov:{
+    logo: 'https://img.avia01.com/upload/201809/17013704496d.png',
+    name: 'gok',
+    bg:'linear-gradient(to right, #915026, #632d11)'
+  },
 };
