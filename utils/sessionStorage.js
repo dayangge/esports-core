@@ -1,4 +1,13 @@
 const storage = window.sessionStorage;
+const _isSessionStorageSupported = function() {
+  try {
+    window.sessionStorage.setItem('test', 1);
+    window.sessionStorage.removeItem('test');
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
 
 const SessionStorage = {
     add: (key, value) => {

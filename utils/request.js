@@ -57,10 +57,10 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 function request(url, options) {
-  if (storage.get('token')) {
+ /* if (storage.get('token')) {
     options.headers = {};
     options.headers.Authorization = `Bearer ${storage.get('token')}`;
-  }
+  }*/
 
   const newOptions = {  ...options };
   if (newOptions.method === 'POST' || newOptions.method === 'PUT' || newOptions.method === 'DELETE') {
@@ -71,7 +71,7 @@ function request(url, options) {
         ...newOptions.headers,
       };
       newOptions.body = JSON.stringify(newOptions.body);
-      newOptions.mode = 'cors'
+      newOptions.mode = 'cors';
       console.log()
     } else {
       newOptions.mode = 'cors';
@@ -98,11 +98,12 @@ function request(url, options) {
 function proxyRequest(url, options) {
   options = options || {};
   return request(url, options).then((response) => {
-    if (response.code === 0) {
-
+    if (response.code === 0 ) {
       return response.data;
+    }else if(response.code === 200){
+      return response;
     }else {
-     console.log(response.msg)
+      console.log(response.mag)
     }
   }).catch((e) => {
     // notification.error({

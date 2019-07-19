@@ -10,7 +10,7 @@ export async function login1(params) {
 
 /*登陆*/
 export async function loginApp(params) {
-  return request(`http://192.168.10.244:8082/v1/auth?${stringify(params)}`);
+  return request(`http://192.168.10.108:8085/v1/auth?${stringify(params)}`);
 }
 /*
 

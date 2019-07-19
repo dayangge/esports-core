@@ -18,6 +18,34 @@ export const normalizeData = (data, schema) => {
   }
 };
 
+export const normalizeDataForHandicapItem = (data, schema) => {
+  let kvObj = {};
+  let ids = [];
+  let handicapData = {};
+  let handicapItemData = {};
+  if(Array.isArray(data)) {
+    data.forEach(item => {
+      if(item.handicap_items){
+        item.handicap_items.map((val) => {
+          handicapItemData[val.handicap_item_id] = val
+        });
+      }
+      kvObj[item[schema]] = item;
+      ids.push(item[schema])
+    })
+  } else {
+    kvObj[data[schema]] = data;
+    ids.push(data[schema])
+  }
+  handicapData = {
+    ['list']: kvObj,
+      ids
+  }
+  return {handicapData, handicapItemData}
+
+
+};
+
 export const newDataAccordingToID = (data, schema) => {
   let kvObj = {};
   let round = [];
